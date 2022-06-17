@@ -163,3 +163,29 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = "1066560860610-bm1bjm0cn5k7vh9tsqvvsu70fdlvrkti.
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = "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"
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"
+
+LOG_FILE = BASE_DIR / "var" / "log" / "main_log.log"
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "console": {"format": "[%(asctime)s] %(levelname)s %(name)s (%(lineno)d) %(message)s"},
+    },
+    "handlers": {
+        "file": {
+            "level": "DEBUG",
+            "class": "logging.FileHandler",
+            "filename": LOG_FILE,
+            "formatter": "console",
+        },
+        "console": {"class": "logging.StreamHandler", "formatter": "console"},
+    },
+    "loggers": {
+        "django": {"level": "INFO", "handlers": ["console"]},
+        "mainapp": {
+            "level": "DEBUG",
+            "handlers": ["file"],
+        },
+    },
+}
